@@ -1,5 +1,6 @@
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 import {Field, ID, ObjectType} from 'type-graphql';
+import {Purchase} from '../../payments/models/purchases';
 
 // tslint:disable:variable-name
 
@@ -74,11 +75,16 @@ export class User {
   @Field(type => [String])
   metadata: any;
 
-  @CreateDateColumn()
+  @CreateDateColumn({type: 'datetime'})
   @Field()
-  created_at: Date;
+  createdAt: Date;
 
-  @UpdateDateColumn()
+  @UpdateDateColumn({type: 'datetime'})
   @Field()
-  updated_at: Date;
+  updatedAt: Date;
+
+  @OneToMany(type => Purchase, purchase => purchase.user)
+  @Field()
+  purchases: Purchase[];
+
 }
