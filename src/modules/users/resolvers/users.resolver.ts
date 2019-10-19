@@ -1,8 +1,8 @@
 import {Query, Resolver} from '@nestjs/graphql';
-import {User} from './models/user';
+import {User} from '../models/user';
 import {InjectRepository} from '@nestjs/typeorm';
 import {Repository} from 'typeorm';
-import {Arg, Int} from 'type-graphql';
+import {Arg} from 'type-graphql';
 
 @Resolver(() => User)
 export class UsersResolver {
