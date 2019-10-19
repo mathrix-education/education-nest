@@ -2,8 +2,6 @@ import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Upd
 import {Field, ID, ObjectType} from 'type-graphql';
 import {Purchase} from '../../payments/models/purchases';
 
-// tslint:disable:variable-name
-
 @Entity({name: 'users'})
 @ObjectType()
 export class User {
@@ -21,11 +19,11 @@ export class User {
 
   @Column()
   @Field()
-  firstname: string;
+  firstName: string;
 
   @Column()
   @Field()
-  lastname: string;
+  lastName: string;
 
   @Column()
   @Field()
@@ -49,27 +47,27 @@ export class User {
 
   @Column({default: 0})
   @Field()
-  daily_achievements: number;
+  dailyAchievements: number;
 
   @Column({type: 'boolean'})
   @Field()
-  premium_bypass: boolean;
+  premiumBypass: boolean;
 
   @Column({type: 'datetime'})
   @Field()
-  premium_bypass_expires_at: Date;
+  premiumBypassExpiresAt: Date;
 
   @Column({type: 'bigint'})
   @Field()
-  grade_id: number;
+  gradeId: number;
 
   @Column()
   @Field()
-  stripe_id: string;
+  stripeId: string;
 
   @Column()
   @Field()
-  braintree_id: string;
+  braintreeId: string;
 
   @Column({type: 'json'})
   @Field(type => [String])
@@ -84,7 +82,6 @@ export class User {
   updatedAt: Date;
 
   @OneToMany(type => Purchase, purchase => purchase.user)
-  @Field()
   purchases: Purchase[];
-
+  @Field()
 }

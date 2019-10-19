@@ -17,20 +17,20 @@ type User {
   id: ID!
   username: String
   email: String!
-  firstname: String!
-  lastname: String!
+  firstName: String!
+  lastName: String!
   password: String!
   scopes: [String!]!
   token: String!
   points: Float!
   daily: Float!
-  daily_achievements: Float!
-  premium_bypass: Boolean!
-  premium_bypass_expires_at: DateTime!
-  grade_id: Float!
-  stripe_id: String!
-  braintree_id: String!
+  dailyAchievements: Float!
+  premiumBypass: Boolean!
+  premiumBypassExpiresAt: DateTime!
+  gradeId: Float!
+  stripeId: String!
+  braintreeId: String!
   metadata: [String!]!
-  created_at: DateTime!
-  updated_at: DateTime!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
