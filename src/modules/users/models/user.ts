@@ -1,6 +1,8 @@
 import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 import {Field, ID, ObjectType} from 'type-graphql';
 import {Purchase} from '../../payments/models/purchases';
+import {Comment} from '../../interactions/models/comment';
+import {Mark} from '../../interactions/models/mark';
 
 @Entity({name: 'users'})
 @ObjectType()
@@ -82,6 +84,14 @@ export class User {
   updatedAt: Date;
 
   @OneToMany(type => Purchase, purchase => purchase.user)
-  purchases: Purchase[];
   @Field()
+  purchases: Purchase[];
+
+  @OneToMany(type => Comment, comment => comment.user)
+  @Field()
+  comments: Comment[];
+
+  @OneToMany(type => Mark, mark => mark.user)
+  @Field()
+  marks: Mark[];
 }
