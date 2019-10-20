@@ -15,14 +15,6 @@ export class Vote {
   @Field()
   points: number;
 
-  @ManyToOne(type => User, user => user.purchases)
-  @Field()
-  user: User;
-
-  @ManyToOne(type => Comment, comment => comment.votes)
-  @Field()
-  comment: Comment;
-
   @CreateDateColumn({type: 'datetime'})
   @Field()
   createdAt: Date;
@@ -30,4 +22,12 @@ export class Vote {
   @UpdateDateColumn({type: 'datetime'})
   @Field()
   updatedAt: Date;
+
+  @ManyToOne(type => User, user => user.votes)
+  @Field(type => User)
+  user: User;
+
+  @ManyToOne(type => Comment, comment => comment.votes)
+  @Field(type => Comment)
+  comment: Comment;
 }

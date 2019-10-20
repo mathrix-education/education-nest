@@ -3,6 +3,7 @@ import {Field} from 'type-graphql';
 import {Comment} from '../../interactions/models/comment';
 import {Report} from '../../interactions/models/report';
 import {Product} from '../../trainings/models/product';
+import {Vote} from '../../interactions/models/vote';
 
 export enum ModuleType {
   COURSE = 'course',
@@ -68,14 +69,14 @@ export class Module {
   updatedAt: Date;
 
   @OneToMany(type => Comment, comment => comment.module)
-  @Field()
+  @Field(type => [Comment])
   comments: Comment[];
 
   @OneToMany(type => Report, report => report.module)
-  @Field()
+  @Field(type => [Report])
   reports: Report[];
 
   @OneToMany(type => Product, product => product.module)
-  @Field()
+  @Field(type => [Product])
   products: Product[];
 }

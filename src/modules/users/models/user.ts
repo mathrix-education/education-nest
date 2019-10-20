@@ -3,6 +3,7 @@ import {Field, ID, ObjectType} from 'type-graphql';
 import {Purchase} from '../../payments/models/purchases';
 import {Comment} from '../../interactions/models/comment';
 import {Mark} from '../../interactions/models/mark';
+import {Vote} from '../../interactions/models/vote';
 
 @Entity({name: 'users'})
 @ObjectType()
@@ -84,14 +85,18 @@ export class User {
   updatedAt: Date;
 
   @OneToMany(type => Purchase, purchase => purchase.user)
-  @Field()
+  @Field(type => [Purchase])
   purchases: Purchase[];
 
   @OneToMany(type => Comment, comment => comment.user)
-  @Field()
+  @Field(type => [Comment])
   comments: Comment[];
 
+  @OneToMany(type => Vote, vote => vote.user)
+  @Field(type => [Vote])
+  votes: Vote[];
+
   @OneToMany(type => Mark, mark => mark.user)
-  @Field()
+  @Field(type => [Mark])
   marks: Mark[];
 }
