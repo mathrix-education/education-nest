@@ -3,7 +3,7 @@ import {Field, ID, ObjectType} from 'type-graphql';
 import {Comment} from '../../interactions/models/comment';
 import {Report} from '../../interactions/models/report';
 import {Product} from '../../trainings/models/product';
-import { GraphQLJSONObject } from 'graphql-type-json';
+import {GraphQLJSONObject} from 'graphql-type-json';
 
 export enum ModuleType {
   COURSE = 'course',
