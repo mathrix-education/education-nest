@@ -3,14 +3,202 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
+type Activity {
+  id: ID!
+  name: String!
+  slug: String!
+  type: String!
+  visible: Boolean!
+  order: Float!
+  premium: Boolean!
+  reviewed: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Category {
+  id: ID!
+  name: String!
+  slug: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  posts: [Post!]!
+}
+
+type Chapter {
+  id: ID!
+  name: String!
+  slug: String!
+  visible: Boolean!
+  order: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  grade: Grade!
+  discipline: Discipline!
+}
+
+type Comment {
+  id: ID!
+  content: String!
+  parent: Comment!
+  children: [Comment!]!
+  module: Module!
+  user: User!
+  votes: [Vote!]!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Country {
+  id: ID!
+  name: String!
+  slug: String!
+  type: String!
+  visible: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  grades: [Grade!]!
+}
+
 """
 The javascript `Date` as string. Type represents date and time as the ISO Date string.
 """
 scalar DateTime
 
+type Discipline {
+  id: ID!
+  name: String!
+  slug: String!
+  visible: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  grades: [Grade!]!
+  chapters: [Chapter!]!
+}
+
+type Grade {
+  id: ID!
+  name: String!
+  slug: String!
+  visible: Boolean!
+  order: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  country: Country!
+  disciplines: [Discipline!]!
+  chapters: [Chapter!]!
+}
+
+"""
+The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSONObject
+
+type Mark {
+  id: ID!
+  status: String!
+  user: User!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Module {
+  id: ID!
+  type: String!
+  questions: [JSONObject!]!
+  content: JSONObject!
+  choices: [JSONObject!]!
+  solutions: [JSONObject!]!
+  corrections: [JSONObject!]!
+  options: JSONObject!
+  visible: JSONObject!
+  order: Float!
+  seoIndex: Boolean!
+  seoTitle: String!
+  seoSlug: String!
+  seoKeywords: String!
+  seoDescription: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  comments: [Comment!]!
+  reports: [Report!]!
+  products: [Product!]!
+}
+
+type Notion {
+  id: ID!
+  name: String!
+  type: String!
+  visible: Boolean!
+  order: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Post {
+  id: ID!
+  title: String!
+  slug: String!
+  createAt: DateTime!
+  updatedAt: DateTime!
+  category: Category!
+}
+
+type Product {
+  id: ID!
+  name: String!
+  slug: String!
+  image: String!
+  type: String!
+  description: String!
+  price: Float!
+  visible: Boolean!
+  buyable: Boolean!
+  order: Float!
+  parent: Product!
+  children: [Product!]!
+  module: Module!
+  purchases: [Purchase!]!
+  createdAt: DateTime!
+  updateAt: DateTime!
+}
+
+type Purchase {
+  id: ID!
+  transactionId: String!
+  user: User!
+  product: Product!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
 type Query {
+  me: User!
   getUsers: [User!]!
   getUser(id: Float!): User!
+}
+
+type Report {
+  id: ID!
+  context: String!
+  type: String!
+  content: String!
+  status: String!
+  module: Module!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+}
+
+type Transaction {
+  id: ID!
+  type: String!
+  planId: String!
+  amount: Float!
+  refundedAmount: Float!
+  refundedTransactionId: String!
+  customerId: String!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type User {
@@ -30,7 +218,20 @@ type User {
   gradeId: Float!
   stripeId: String!
   braintreeId: String!
-  metadata: [String!]!
+  metadata: String!
   createdAt: DateTime!
   updatedAt: DateTime!
+  purchases: [Purchase!]!
+  comments: [Comment!]!
+  votes: [Vote!]!
+  marks: [Mark!]!
+}
+
+type Vote {
+  id: ID!
+  points: Float!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  user: User!
+  comment: Comment!
 }

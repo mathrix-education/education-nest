@@ -19,7 +19,7 @@ import {Vote} from './modules/interactions/models/vote';
 import {Comment} from './modules/interactions/models/comment';
 import {Purchase} from './modules/payments/models/purchases';
 import {Transaction} from './modules/payments/models/transaction';
-import {InteractionsModule} from './modules/interactions/interactionsModule';
+import {InteractionsModule} from './modules/interactions/interactions.module';
 import {PaymentsModule} from './modules/payments/payments.module';
 import {TrainingsModule} from './modules/trainings/trainings.module';
 import {Product} from './modules/trainings/models/product';
