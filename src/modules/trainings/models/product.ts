@@ -2,6 +2,7 @@ import {Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGenerated
 import {Field, ID, ObjectType} from 'type-graphql';
 import {Module} from '../../content/models/module';
 import {Purchase} from '../../payments/models/purchases';
+import {Vote} from '../../interactions/models/vote';
 
 @Entity({name: 'products'})
 @ObjectType()
@@ -47,19 +48,19 @@ export class Product {
   order: number;
 
   @ManyToOne(type => Product, product => product.children)
-  @Field()
+  @Field(type => Product)
   parent: Product;
 
   @OneToMany(type => Product, product => product.parent)
-  @Field()
+  @Field(type => [Product])
   children: Product[];
 
   @ManyToOne(type => Module, module => module.products)
-  @Field()
+  @Field(type => Module)
   module: Module;
 
   @OneToMany(type => Purchase, purchase => purchase.product)
-  @Field()
+  @Field(type => [Purchase])
   purchases: Purchase[];
 
   @CreateDateColumn({type: 'datetime'})
