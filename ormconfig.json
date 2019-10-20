@@ -1,0 +1,17 @@
+{
+  "type": "mysql",
+  "host": "localhost",
+  "port": 3306,
+  "username": "root",
+  "password": "salome3004",
+  "database": "mathrix_education_nest",
+  "migrationsTableName": "migrations",
+  "migrations": [
+    "src/migrations/*.ts"
+  ],
+  "cli": {
+    "migrationsDir": "src/migrations"
+  },
+  "entities": ["src/modules/**/models/*.ts"],
+  "synchronize": false
+}

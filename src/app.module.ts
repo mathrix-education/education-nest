@@ -32,47 +32,7 @@ import {ScopeAuthChecker, TypeGraphQLBuildSchemaOptions} from './modules/users/s
       context: ({req}) => ({req}),
       buildSchemaOptions: {authChecker: ScopeAuthChecker} as TypeGraphQLBuildSchemaOptions,
     }),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      host: 'localhost',
-      port: 3306,
-      username: 'root',
-      password: 'salome3004',
-      database: 'mathrix_education_nest',
-      migrationsTableName: 'migrations',
-      migrations: [
-        'src/migrations/*.ts',
-      ],
-      cli: {
-        migrationsDir: 'src/migrations',
-      },
-      entities: [
-        // Blog
-        Category,
-        Post,
-        // Content
-        Activity,
-        Chapter,
-        Country,
-        Discipline,
-        Grade,
-        Module,
-        Notion,
-        // Interactions
-        Comment,
-        Mark,
-        Report,
-        Vote,
-        // Payments
-        Purchase,
-        Transaction,
-        // Trainings
-        Product,
-        // Users
-        User,
-      ],
-      synchronize: true,
-    }),
+    TypeOrmModule.forRoot(),
     BlogModule,
     InteractionsModule,
     PaymentsModule,
