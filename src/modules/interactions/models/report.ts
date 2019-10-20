@@ -1,16 +1,24 @@
-import {Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import {Field, ID, ObjectType} from 'type-graphql';
-import {Module} from '../../content/models/module';
-import {Vote} from './vote';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Field, ID, ObjectType } from 'type-graphql';
+import { Module } from '../../content/models/module';
+import { Vote } from './vote';
 
-@Entity({name: 'reports'})
+@Entity({ name: 'reports' })
 @ObjectType()
 export class Report {
-  @PrimaryGeneratedColumn({type: 'bigint'})
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   @Field(type => ID)
   id: number;
 
-  @Column({type: 'text'})
+  @Column({ type: 'text' })
   @Field()
   context: string;
 
@@ -18,7 +26,7 @@ export class Report {
   @Field()
   type: string;
 
-  @Column({type: 'text'})
+  @Column({ type: 'text' })
   @Field()
   content: string;
 
@@ -30,11 +38,11 @@ export class Report {
   @Field(type => Module)
   module: Module;
 
-  @CreateDateColumn({type: 'datetime'})
+  @CreateDateColumn({ type: 'datetime' })
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({type: 'datetime'})
+  @UpdateDateColumn({ type: 'datetime' })
   @Field()
   updatedAt: Date;
 }

@@ -1,13 +1,12 @@
-import {Query, Resolver} from '@nestjs/graphql';
-import {User} from '../models/user';
-import {Arg} from 'type-graphql';
-import {CurrentUser} from '../decorators/current-user.decorator';
-import {UsersService} from '../services/users.service';
+import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { User } from '../models/user';
+import { Arg } from 'type-graphql';
+import { CurrentUser } from '../decorators/current-user.decorator';
+import { UsersService } from '../services/users.service';
 
 @Resolver(() => User)
 export class UsersResolver {
-  constructor(private readonly usersService: UsersService) {
-  }
+  constructor(private readonly usersService: UsersService) {}
 
   @Query(() => User)
   async me(@CurrentUser() user: User) {
@@ -22,5 +21,13 @@ export class UsersResolver {
   @Query(() => User)
   async getUser(@Arg('id') id: number) {
     return this.usersService.read(id);
+  }
+
+  @Mutation(() => User)
+  async createUser(
+    @Args('email') email: string,
+    @Args('password') password: string,
+  ) {
+    return this.usersService.create({ email, password });
   }
 }

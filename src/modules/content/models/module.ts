@@ -1,9 +1,16 @@
-import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import {Field, ID, ObjectType} from 'type-graphql';
-import {Comment} from '../../interactions/models/comment';
-import {Report} from '../../interactions/models/report';
-import {Product} from '../../trainings/models/product';
-import {GraphQLJSONObject} from 'graphql-type-json';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Field, ID, ObjectType } from 'type-graphql';
+import { Comment } from '../../interactions/models/comment';
+import { Report } from '../../interactions/models/report';
+import { Product } from '../../trainings/models/product';
+import { GraphQLJSONObject } from 'graphql-type-json';
 
 export enum ModuleType {
   COURSE = 'course',
@@ -12,10 +19,10 @@ export enum ModuleType {
   TEST = 'test',
 }
 
-@Entity({name: 'modules'})
+@Entity({ name: 'modules' })
 @ObjectType()
 export class Module {
-  @PrimaryGeneratedColumn({type: 'bigint'})
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   @Field(type => ID)
   id: bigint;
 
@@ -26,35 +33,35 @@ export class Module {
   @Field()
   type: ModuleType;
 
-  @Column({type: 'json'})
+  @Column({ type: 'json' })
   @Field(type => GraphQLJSONObject)
   questions: string[] | string[][];
 
-  @Column({type: 'json'})
+  @Column({ type: 'json' })
   @Field(type => GraphQLJSONObject)
   content: object;
 
-  @Column({type: 'json'})
+  @Column({ type: 'json' })
   @Field(type => GraphQLJSONObject)
   choices: string[];
 
-  @Column({type: 'json'})
+  @Column({ type: 'json' })
   @Field(type => GraphQLJSONObject)
   solutions: Array<Array<string | number>>;
 
-  @Column({type: 'json'})
+  @Column({ type: 'json' })
   @Field(type => GraphQLJSONObject)
   corrections: string[][];
 
-  @Column({type: 'json', nullable: true})
+  @Column({ type: 'json', nullable: true })
   @Field(type => GraphQLJSONObject)
   options: object;
 
-  @Column({type: 'boolean'})
+  @Column({ type: 'boolean' })
   @Field(type => GraphQLJSONObject)
   visible: boolean;
 
-  @Column({type: 'smallint'})
+  @Column({ type: 'smallint' })
   @Field()
   order: number;
 
@@ -70,7 +77,7 @@ export class Module {
   @Field()
   seoSlug: string;
 
-  @Column({type: 'simple-array'})
+  @Column({ type: 'simple-array' })
   @Field()
   seoKeywords: string;
 
@@ -78,11 +85,11 @@ export class Module {
   @Field()
   seoDescription: string;
 
-  @CreateDateColumn({type: 'datetime'})
+  @CreateDateColumn({ type: 'datetime' })
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({type: 'datetime'})
+  @UpdateDateColumn({ type: 'datetime' })
   @Field()
   updatedAt: Date;
 

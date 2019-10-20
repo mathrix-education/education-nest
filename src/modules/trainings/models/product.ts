@@ -1,13 +1,21 @@
-import {Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import {Field, ID, ObjectType} from 'type-graphql';
-import {Module} from '../../content/models/module';
-import {Purchase} from '../../payments/models/purchases';
-import {Vote} from '../../interactions/models/vote';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Field, ID, ObjectType } from 'type-graphql';
+import { Module } from '../../content/models/module';
+import { Purchase } from '../../payments/models/purchases';
+import { Vote } from '../../interactions/models/vote';
 
-@Entity({name: 'products'})
+@Entity({ name: 'products' })
 @ObjectType()
 export class Product {
-  @PrimaryGeneratedColumn({type: 'bigint'})
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   @Field(type => ID)
   id: number;
 
@@ -27,19 +35,19 @@ export class Product {
   @Field()
   type: string;
 
-  @Column({type: 'text'})
+  @Column({ type: 'text' })
   @Field()
   description: string;
 
-  @Column({type: 'double'})
+  @Column({ type: 'double' })
   @Field()
   price: number;
 
-  @Column({type: 'boolean'})
+  @Column({ type: 'boolean' })
   @Field()
   visible: boolean;
 
-  @Column({type: 'boolean'})
+  @Column({ type: 'boolean' })
   @Field()
   buyable: boolean;
 
@@ -63,11 +71,11 @@ export class Product {
   @Field(type => [Purchase])
   purchases: Purchase[];
 
-  @CreateDateColumn({type: 'datetime'})
+  @CreateDateColumn({ type: 'datetime' })
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({type: 'datetime'})
+  @UpdateDateColumn({ type: 'datetime' })
   @Field()
   updateAt: Date;
 }

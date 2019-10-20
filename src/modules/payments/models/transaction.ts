@@ -1,10 +1,16 @@
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import {Field, ID, ObjectType} from 'type-graphql';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Field, ID, ObjectType } from 'type-graphql';
 
-@Entity({name: 'transactions'})
+@Entity({ name: 'transactions' })
 @ObjectType()
 export class Transaction {
-  @PrimaryGeneratedColumn({type: 'bigint'})
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   @Field(type => ID)
   id: number;
 
@@ -16,11 +22,11 @@ export class Transaction {
   @Field()
   planId: string;
 
-  @Column({type: 'double'})
+  @Column({ type: 'double' })
   @Field()
   amount: number;
 
-  @Column({type: 'double'})
+  @Column({ type: 'double' })
   @Field()
   refundedAmount: number;
 
@@ -32,11 +38,11 @@ export class Transaction {
   @Field()
   customerId: string;
 
-  @CreateDateColumn({type: 'datetime'})
+  @CreateDateColumn({ type: 'datetime' })
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({type: 'datetime'})
+  @UpdateDateColumn({ type: 'datetime' })
   @Field()
   updatedAt: Date;
 }

@@ -1,14 +1,22 @@
-import {Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import {Field, ID, ObjectType} from 'type-graphql';
-import {User} from '../../users/models/user';
-import {Vote} from './vote';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Field, ID, ObjectType } from 'type-graphql';
+import { User } from '../../users/models/user';
+import { Vote } from './vote';
 
 // tslint:disable:variable-name
 
-@Entity({name: 'marks'})
+@Entity({ name: 'marks' })
 @ObjectType()
 export class Mark {
-  @PrimaryGeneratedColumn({type: 'bigint'})
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   @Field(type => ID)
   id: number;
 
@@ -20,11 +28,11 @@ export class Mark {
   @Field(type => User)
   user: User;
 
-  @CreateDateColumn({type: 'datetime'})
+  @CreateDateColumn({ type: 'datetime' })
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({type: 'datetime'})
+  @UpdateDateColumn({ type: 'datetime' })
   @Field()
   updatedAt: Date;
 }

@@ -1,11 +1,18 @@
-import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import {Post} from './post';
-import {Field, ID, ObjectType} from 'type-graphql';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Post } from './post';
+import { Field, ID, ObjectType } from 'type-graphql';
 
-@Entity({name: 'categories'})
+@Entity({ name: 'categories' })
 @ObjectType()
 export class Category {
-  @PrimaryGeneratedColumn({type: 'bigint'})
+  @PrimaryGeneratedColumn({ type: 'bigint' })
   @Field(type => ID)
   id: number;
 
@@ -17,11 +24,11 @@ export class Category {
   @Field()
   slug: string;
 
-  @CreateDateColumn({type: 'datetime'})
+  @CreateDateColumn({ type: 'datetime' })
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({type: 'datetime'})
+  @UpdateDateColumn({ type: 'datetime' })
   @Field()
   updatedAt: Date;
 
