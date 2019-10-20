@@ -43,6 +43,9 @@ import {ScopeAuthChecker, TypeGraphQLBuildSchemaOptions} from './modules/users/s
       migrations: [
         'src/migrations/*.ts',
       ],
+      cli: {
+        migrationsDir: 'src/migrations',
+      },
       entities: [
         // Blog
         Category,

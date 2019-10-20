@@ -1,5 +1,16 @@
-import {Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from 'typeorm';
 import {Field, ID, ObjectType} from 'type-graphql';
+import {Module} from "./module";
+import {Chapter} from "./chapter";
+import {Activity} from "./activity";
 
 export enum NotionType {
   FURTHER = 'further',
@@ -37,4 +48,12 @@ export class Notion {
   @UpdateDateColumn({type: 'datetime'})
   @Field()
   updatedAt: Date;
+
+  @ManyToOne(() => Chapter, chapter => chapter.notions)
+  @Field(() => Chapter)
+  chapter: Chapter;
+
+  @OneToMany(() => Activity, activity => activity.notion)
+  @Field(() => [Activity])
+  activities: Activity[];
 }

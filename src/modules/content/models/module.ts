@@ -1,9 +1,19 @@
-import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from 'typeorm';
 import {Field, ID, ObjectType} from 'type-graphql';
 import {Comment} from '../../interactions/models/comment';
 import {Report} from '../../interactions/models/report';
 import {Product} from '../../trainings/models/product';
 import {GraphQLJSONObject} from 'graphql-type-json';
+import {Post} from "../../blog/models/post";
+import {Activity} from "./activity";
 
 export enum ModuleType {
   COURSE = 'course',
@@ -86,15 +96,23 @@ export class Module {
   @Field()
   updatedAt: Date;
 
+  @ManyToOne(() => Activity, activity => activity.modules)
+  @Field(() => Activity)
+  activity: Activity;
+
   @OneToMany(type => Comment, comment => comment.module)
   @Field(type => [Comment])
   comments: Comment[];
 
-  @OneToMany(type => Report, report => report.module)
-  @Field(type => [Report])
-  reports: Report[];
+  @OneToMany(type => Post, post => post.module)
+  @Field(type => [Post])
+  posts: Post[];
 
   @OneToMany(type => Product, product => product.module)
   @Field(type => [Product])
   products: Product[];
+
+  @OneToMany(type => Report, report => report.module)
+  @Field(type => [Report])
+  reports: Report[];
 }

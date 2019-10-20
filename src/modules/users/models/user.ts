@@ -1,10 +1,21 @@
-import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from 'typeorm';
 import {Field, ID, ObjectType} from 'type-graphql';
 import {Purchase} from '../../payments/models/purchases';
 import {Comment} from '../../interactions/models/comment';
 import {Mark} from '../../interactions/models/mark';
 import {Vote} from '../../interactions/models/vote';
 import {GraphQLObjectType, GraphQLString} from 'graphql';
+import {Post} from "../../blog/models/post";
+import {Notion} from "../../content/models/notion";
+import {Grade} from "../../content/models/grade";
 
 @Entity({name: 'users'})
 @ObjectType()
@@ -85,19 +96,27 @@ export class User {
   @Field()
   updatedAt: Date;
 
-  @OneToMany(type => Purchase, purchase => purchase.user)
-  @Field(type => [Purchase])
-  purchases: Purchase[];
+  @ManyToOne(() => Grade, grade => grade.users)
+  @Field(() => Grade)
+  grade: Grade;
 
   @OneToMany(type => Comment, comment => comment.user)
   @Field(type => [Comment])
   comments: Comment[];
 
-  @OneToMany(type => Vote, vote => vote.user)
-  @Field(type => [Vote])
-  votes: Vote[];
-
   @OneToMany(type => Mark, mark => mark.user)
   @Field(type => [Mark])
   marks: Mark[];
+
+  @OneToMany(type => Post, post => post.user)
+  @Field(type => [Post])
+  posts: Post[];
+
+  @OneToMany(type => Purchase, purchase => purchase.user)
+  @Field(type => [Purchase])
+  purchases: Purchase[];
+
+  @OneToMany(type => Vote, vote => vote.user)
+  @Field(type => [Vote])
+  votes: Vote[];
 }

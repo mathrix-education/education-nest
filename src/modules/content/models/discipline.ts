@@ -38,10 +38,6 @@ export class Discipline {
   @Field()
   updatedAt: Date;
 
-  @ManyToMany(() => Grade, grade => grade.disciplines)
-  @Field(type => [Grade])
-  grades: Grade[];
-
   @OneToMany(() => Chapter, chapter => chapter.discipline)
   @Field(type => [Chapter])
   chapters: Chapter[];
