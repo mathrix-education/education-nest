@@ -1,15 +1,12 @@
 import {Query, Resolver} from '@nestjs/graphql';
 import {User} from '../models/user';
-import {InjectRepository} from '@nestjs/typeorm';
-import {Repository} from 'typeorm';
 import {Arg} from 'type-graphql';
 import {CurrentUser} from '../decorators/current-user.decorator';
+import {UsersService} from '../services/users.service';
 
 @Resolver(() => User)
 export class UsersResolver {
-  constructor(
-    @InjectRepository(User) private readonly userRepository: Repository<User>,
-  ) {
+  constructor(private readonly usersService: UsersService) {
   }
 
   @Query(() => User)
@@ -19,11 +16,11 @@ export class UsersResolver {
 
   @Query(() => [User])
   async getUsers() {
-    return this.userRepository.find();
+    return this.usersService.list();
   }
 
   @Query(() => User)
   async getUser(@Arg('id') id: number) {
-    return this.userRepository.findOne(id);
+    return this.usersService.read(id);
   }
 }
