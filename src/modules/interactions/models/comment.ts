@@ -2,6 +2,7 @@ import {Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGenerated
 import {Field, ID, ObjectType} from 'type-graphql';
 import {Module} from '../../content/models/module';
 import {User} from '../../users/models/user';
+import {Vote} from './vote';
 
 // tslint:disable:variable-name
 
@@ -21,16 +22,20 @@ export class Comment {
   parent: Comment;
 
   @OneToMany(type => Comment, product => product.parent)
-  @Field()
+  @Field(type => [Comment])
   children: Comment[];
 
   @ManyToOne(type => Module, module => module.comments)
-  @Field()
+  @Field(type => Module)
   module: Module;
 
   @ManyToOne(type => User, user => user.comments)
-  @Field()
+  @Field(type => User)
   user: User;
+
+  @OneToMany(type => Vote, vote => vote.comment)
+  @Field(type => Vote)
+  votes: Vote[];
 
   @CreateDateColumn({type: 'datetime'})
   @Field()

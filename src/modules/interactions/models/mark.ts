@@ -1,6 +1,7 @@
 import {Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
 import {Field, ID, ObjectType} from 'type-graphql';
 import {User} from '../../users/models/user';
+import {Vote} from './vote';
 
 // tslint:disable:variable-name
 
@@ -16,7 +17,7 @@ export class Mark {
   status: string;
 
   @ManyToOne(type => User, user => user.marks)
-  @Field()
+  @Field(type => User)
   user: User;
 
   @CreateDateColumn({type: 'datetime'})
