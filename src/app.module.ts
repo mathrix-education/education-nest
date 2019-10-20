@@ -13,11 +13,22 @@ import {Discipline} from './modules/content/models/discipline';
 import {Grade} from './modules/content/models/grade';
 import {Module} from './modules/content/models/module';
 import {Notion} from './modules/content/models/notion';
+import {Mark} from './modules/interactions/models/mark';
+import {Report} from './modules/interactions/models/report';
+import {Vote} from './modules/interactions/models/vote';
+import {Comment} from './modules/interactions/models/comment';
+import {Purchase} from './modules/payments/models/purchases';
+import {Transaction} from './modules/payments/models/transaction';
+import {InteractionsModule} from './modules/interactions/interactionsModule';
+import {PaymentsModule} from './modules/payments/payments.module';
+import {TrainingsModule} from './modules/trainings/trainings.module';
+import {Product} from './modules/trainings/models/product';
 
 @NestModule({
   imports: [
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
+      context: ({req}) => ({req}),
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -42,12 +53,25 @@ import {Notion} from './modules/content/models/notion';
         Grade,
         Module,
         Notion,
+        // Interactions
+        Comment,
+        Mark,
+        Report,
+        Vote,
+        // Payments
+        Purchase,
+        Transaction,
+        // Trainings
+        Product,
         // Users
         User,
       ],
       synchronize: true,
     }),
     BlogModule,
+    InteractionsModule,
+    PaymentsModule,
+    TrainingsModule,
     UsersModule,
   ],
 })
