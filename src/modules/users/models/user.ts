@@ -4,6 +4,7 @@ import {Purchase} from '../../payments/models/purchases';
 import {Comment} from '../../interactions/models/comment';
 import {Mark} from '../../interactions/models/mark';
 import {Vote} from '../../interactions/models/vote';
+import {GraphQLObjectType, GraphQLString} from 'graphql';
 
 @Entity({name: 'users'})
 @ObjectType()
@@ -73,7 +74,7 @@ export class User {
   braintreeId: string;
 
   @Column({type: 'json'})
-  @Field(type => [String])
+  @Field(type => GraphQLString)
   metadata: any;
 
   @CreateDateColumn({type: 'datetime'})

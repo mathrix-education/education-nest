@@ -19,16 +19,18 @@ import {Vote} from './modules/interactions/models/vote';
 import {Comment} from './modules/interactions/models/comment';
 import {Purchase} from './modules/payments/models/purchases';
 import {Transaction} from './modules/payments/models/transaction';
-import {InteractionsModule} from './modules/interactions/interactionsModule';
+import {InteractionsModule} from './modules/interactions/interactions.module';
 import {PaymentsModule} from './modules/payments/payments.module';
 import {TrainingsModule} from './modules/trainings/trainings.module';
 import {Product} from './modules/trainings/models/product';
+import {ScopeAuthChecker, TypeGraphQLBuildSchemaOptions} from './modules/users/scope-checker';
 
 @NestModule({
   imports: [
     GraphQLModule.forRoot({
       autoSchemaFile: 'schema.gql',
       context: ({req}) => ({req}),
+      buildSchemaOptions: {authChecker: ScopeAuthChecker} as TypeGraphQLBuildSchemaOptions,
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
