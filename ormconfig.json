@@ -10,7 +10,8 @@
     "src/migrations/*.ts"
   ],
   "cli": {
-    "migrationsDir": "src/migrations"
+    "migrationsDir": "src/migrations",
+    "entitiesDir": "src/modules/**/models"
   },
   "entities": ["src/modules/**/models/*.ts"],
   "synchronize": false

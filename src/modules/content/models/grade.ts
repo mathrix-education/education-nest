@@ -1,7 +1,7 @@
 import {
   Column,
   CreateDateColumn,
-  Entity,
+  Entity, JoinColumn,
   ManyToMany,
   ManyToOne, OneToMany,
   PrimaryGeneratedColumn,
@@ -28,23 +28,24 @@ export class Grade {
   @Field()
   slug: string;
 
-  @Column({type: 'boolean'})
-  @Field()
-  visible: boolean;
-
   @Column({type: 'smallint'})
   @Field()
   order: number;
 
-  @CreateDateColumn({type: 'datetime'})
+  @Column({type: 'boolean'})
+  @Field()
+  visible: boolean;
+
+  @CreateDateColumn({name: 'created_at', type: 'datetime'})
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({type: 'datetime'})
+  @UpdateDateColumn({name: 'updated_at', type: 'datetime'})
   @Field()
   updatedAt: Date;
 
   @ManyToOne(type => Grade, grade => grade.children)
+  @JoinColumn({name: 'parent_id'})
   @Field(type => Grade)
   parent: Grade;
 
@@ -53,6 +54,7 @@ export class Grade {
   children: Grade[];
 
   @ManyToOne(() => Country, country => country.grades)
+  @JoinColumn({name: 'country_id'})
   @Field(type => Country)
   country: Country;
 

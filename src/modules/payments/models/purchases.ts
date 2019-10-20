@@ -1,4 +1,12 @@
-import {Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from 'typeorm';
 import {Field, ID, ObjectType} from 'type-graphql';
 import {User} from '../../users/models/user';
 import {Product} from '../../trainings/models/product';
@@ -13,23 +21,25 @@ export class Purchase {
   @Field(type => ID)
   id: number;
 
-  @Column()
+  @Column({name: 'transaction_id'})
   @Field()
   transactionId: string;
 
   @ManyToOne(type => User, user => user.purchases)
+  @JoinColumn({name: 'user_id'})
   @Field(type => User)
   user: User;
 
   @ManyToOne(type => Product, product => product.purchases)
+  @JoinColumn({name: 'product_id'})
   @Field(type => Product)
   product: Product;
 
-  @CreateDateColumn({type: 'datetime'})
+  @CreateDateColumn({name: 'created_at', type: 'datetime'})
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({type: 'datetime'})
+  @UpdateDateColumn({name: 'updated_at', type: 'datetime'})
   @Field()
   updatedAt: Date;
 }

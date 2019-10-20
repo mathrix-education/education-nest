@@ -1,7 +1,7 @@
 import {
   Column,
   CreateDateColumn,
-  Entity,
+  Entity, JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -27,27 +27,29 @@ export class Chapter {
   @Field()
   slug: string;
 
-  @Column({type: 'boolean'})
-  @Field()
-  visible: boolean;
-
   @Column({type: 'smallint'})
   @Field()
   order: number;
 
-  @CreateDateColumn({type: 'datetime'})
+  @Column({type: 'boolean'})
+  @Field()
+  visible: boolean;
+
+  @CreateDateColumn({name: 'created_at', type: 'datetime'})
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({type: 'datetime'})
+  @UpdateDateColumn({name: 'updated_at', type: 'datetime'})
   @Field()
   updatedAt: Date;
 
   @ManyToOne(() => Grade, grade => grade.chapters)
+  @JoinColumn({name: 'grade_id'})
   @Field(type => Grade)
   grade: Grade;
 
   @ManyToOne(() => Discipline, discipline => discipline.chapters)
+  @JoinColumn({name: 'discipline_id'})
   @Field(type => Discipline)
   discipline: Discipline;
 

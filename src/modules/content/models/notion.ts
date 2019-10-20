@@ -1,7 +1,7 @@
 import {
   Column,
   CreateDateColumn,
-  Entity,
+  Entity, JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -41,15 +41,16 @@ export class Notion {
   @Field()
   order: number;
 
-  @CreateDateColumn({type: 'datetime'})
+  @CreateDateColumn({name: 'created_at', type: 'datetime'})
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({type: 'datetime'})
+  @UpdateDateColumn({name: 'updated_at', type: 'datetime'})
   @Field()
   updatedAt: Date;
 
   @ManyToOne(() => Chapter, chapter => chapter.notions)
+  @JoinColumn({name: 'chapter_id'})
   @Field(() => Chapter)
   chapter: Chapter;
 

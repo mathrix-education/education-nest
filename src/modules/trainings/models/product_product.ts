@@ -1,21 +1,23 @@
-import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn, RelationId} from 'typeorm';
 import {Field, ID, ObjectType} from 'type-graphql';
 import {Product} from './product';
 
-@Entity({name: 'products'})
+@Entity({name: 'products_products'})
 @ObjectType()
 export class ProductProduct {
   @PrimaryGeneratedColumn({type: 'bigint'})
   @Field(type => ID)
   id: number;
 
-  @OneToMany(type => Product, product => product.parent)
-  @Field(type => [Product])
-  parent: Product[];
+  @ManyToOne(() => Product, product => product.parents)
+  @JoinColumn({name: 'parent_id'})
+  @Field(type => Product)
+  parent: Product;
 
-  @OneToMany(type => Product, product => product.children)
-  @Field(type => [Product])
-  children: Product[];
+  @ManyToOne(type => Product, product => product.children)
+  @JoinColumn({name: 'child_id'})
+  @Field(type => Product)
+  child: Product;
 
   @Column({type: 'smallint'})
   @Field()

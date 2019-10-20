@@ -1,4 +1,13 @@
-import {Column, CreateDateColumn, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn
+} from 'typeorm';
 import {Field, ID, ObjectType} from 'type-graphql';
 import {Module} from '../../content/models/module';
 import {Purchase} from '../../payments/models/purchases';
@@ -48,17 +57,18 @@ export class Product {
   @Field()
   order: number;
 
-  @ManyToOne(type => ProductProduct, productproduct => productproduct.parent)
-  @Field(type => ProductProduct)
-  parent: ProductProduct;
-
-  @ManyToOne(type => ProductProduct, productproduct => productproduct.children)
-  @Field(type => ProductProduct)
-  children: ProductProduct;
-
   @ManyToOne(type => Module, module => module.products)
+  @JoinColumn({name: 'module_id'})
   @Field(type => Module)
   module: Module;
+
+  @OneToMany(type => ProductProduct, productproduct => productproduct.parent)
+  @Field(type => [ProductProduct])
+  parents: ProductProduct[];
+
+  @OneToMany(type => ProductProduct, productproduct => productproduct.child)
+  @Field(type => [ProductProduct])
+  children: ProductProduct[];
 
   @OneToMany(type => Purchase, purchase => purchase.product)
   @Field(type => [Purchase])

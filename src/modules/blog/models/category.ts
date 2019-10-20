@@ -17,11 +17,11 @@ export class Category {
   @Field()
   slug: string;
 
-  @CreateDateColumn({type: 'datetime'})
+  @CreateDateColumn({name: 'created_at', type: 'datetime'})
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({type: 'datetime'})
+  @UpdateDateColumn({name: 'updated_at', type: 'datetime'})
   @Field()
   updatedAt: Date;
 

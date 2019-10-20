@@ -1,7 +1,7 @@
 import {
   Column,
   CreateDateColumn,
-  Entity,
+  Entity, JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -38,11 +38,11 @@ export class Module {
 
   @Column({type: 'json'})
   @Field(type => GraphQLJSONObject)
-  questions: string[] | string[][];
+  content: object;
 
   @Column({type: 'json'})
   @Field(type => GraphQLJSONObject)
-  content: object;
+  questions: string[] | string[][];
 
   @Column({type: 'json'})
   @Field(type => GraphQLJSONObject)
@@ -64,39 +64,40 @@ export class Module {
   @Field(type => GraphQLJSONObject)
   visible: boolean;
 
+  @Column({name: 'seo_index'})
+  @Field()
+  seoIndex: boolean;
+
+  @Column({name: 'seo_title'})
+  @Field()
+  seoTitle: string;
+
+  @Column({name: 'seo_slug'})
+  @Field()
+  seoSlug: string;
+
+  @Column({name: 'seo_keywords', type: 'simple-array'})
+  @Field()
+  seoKeywords: string;
+
+  @Column({name: 'seo_description'})
+  @Field()
+  seoDescription: string;
+
   @Column({type: 'smallint'})
   @Field()
   order: number;
 
-  @Column()
-  @Field()
-  seoIndex: boolean;
-
-  @Column()
-  @Field()
-  seoTitle: string;
-
-  @Column()
-  @Field()
-  seoSlug: string;
-
-  @Column({type: 'simple-array'})
-  @Field()
-  seoKeywords: string;
-
-  @Column()
-  @Field()
-  seoDescription: string;
-
-  @CreateDateColumn({type: 'datetime'})
+  @CreateDateColumn({name: 'created_at', type: 'datetime'})
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({type: 'datetime'})
+  @UpdateDateColumn({name: 'updated_at', type: 'datetime'})
   @Field()
   updatedAt: Date;
 
   @ManyToOne(() => Activity, activity => activity.modules)
+  @JoinColumn({name: 'activity_id'})
   @Field(() => Activity)
   activity: Activity;
 

@@ -30,11 +30,11 @@ export class Discipline {
   @Field()
   visible: boolean;
 
-  @CreateDateColumn({type: 'datetime'})
+  @CreateDateColumn({name: 'created_at', type: 'datetime'})
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({type: 'datetime'})
+  @UpdateDateColumn({name: 'updated_at', type: 'datetime'})
   @Field()
   updatedAt: Date;
 
