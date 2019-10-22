@@ -94,6 +94,10 @@ The `JSONObject` scalar type represents JSON objects as specified by [ECMA-404](
 """
 scalar JSONObject
 
+type Jwt {
+  accessToken: String!
+}
+
 type Mark {
   id: ID!
   status: String!
@@ -123,6 +127,11 @@ type Module {
   comments: [Comment!]!
   reports: [Report!]!
   products: [Product!]!
+}
+
+type Mutation {
+  createUser(password: String!, email: String!): User!
+  loginUser(password: String!, email: String!): Jwt!
 }
 
 type Notion {
@@ -205,8 +214,8 @@ type User {
   id: ID!
   username: String
   email: String!
-  firstName: String!
-  lastName: String!
+  firstName: String
+  lastName: String
   password: String!
   scopes: [String!]!
   token: String!
@@ -216,9 +225,9 @@ type User {
   premiumBypass: Boolean!
   premiumBypassExpiresAt: DateTime!
   gradeId: Float!
-  stripeId: String!
-  braintreeId: String!
-  metadata: String!
+  stripeId: String
+  braintreeId: String
+  metadata: JSONObject!
   createdAt: DateTime!
   updatedAt: DateTime!
   purchases: [Purchase!]!

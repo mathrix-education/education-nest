@@ -5,14 +5,14 @@ import {
   ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
 } from 'typeorm';
-import {Country} from './country';
-import {Discipline} from './discipline';
-import {Chapter} from './chapter';
-import {Field, ID, ObjectType} from 'type-graphql';
+import { Country } from './country';
+import { Discipline } from './discipline';
+import { Chapter } from './chapter';
+import { Field, ID, ObjectType } from 'type-graphql';
 
-@Entity({name: 'disciplines'})
+@Entity({ name: 'disciplines' })
 @ObjectType()
 export class Grade {
   @PrimaryGeneratedColumn()
@@ -27,19 +27,19 @@ export class Grade {
   @Field()
   slug: string;
 
-  @Column({type: 'boolean'})
+  @Column({ type: 'boolean' })
   @Field()
   visible: boolean;
 
-  @Column({type: 'smallint'})
+  @Column({ type: 'smallint' })
   @Field()
   order: number;
 
-  @CreateDateColumn({type: 'datetime'})
+  @CreateDateColumn({ type: 'datetime' })
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({type: 'datetime'})
+  @UpdateDateColumn({ type: 'datetime' })
   @Field()
   updatedAt: Date;
 

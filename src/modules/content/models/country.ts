@@ -1,9 +1,16 @@
-import {Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import {ActivityType} from './activity';
-import {Grade} from './grade';
-import {Field, ID, ObjectType} from 'type-graphql';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { ActivityType } from './activity';
+import { Grade } from './grade';
+import { Field, ID, ObjectType } from 'type-graphql';
 
-@Entity({name: 'countries'})
+@Entity({ name: 'countries' })
 @ObjectType()
 export class Country {
   @PrimaryGeneratedColumn()
@@ -25,15 +32,15 @@ export class Country {
   @Field()
   type: ActivityType;
 
-  @Column({type: 'boolean'})
+  @Column({ type: 'boolean' })
   @Field()
   visible: boolean;
 
-  @CreateDateColumn({type: 'datetime'})
+  @CreateDateColumn({ type: 'datetime' })
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({type: 'datetime'})
+  @UpdateDateColumn({ type: 'datetime' })
   @Field()
   updatedAt: Date;
 

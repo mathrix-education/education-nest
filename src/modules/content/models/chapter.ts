@@ -1,9 +1,16 @@
-import {Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn, UpdateDateColumn} from 'typeorm';
-import {Grade} from './grade';
-import {Discipline} from './discipline';
-import {Field, ID, ObjectType} from 'type-graphql';
+import {
+  Column,
+  CreateDateColumn,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
+import { Grade } from './grade';
+import { Discipline } from './discipline';
+import { Field, ID, ObjectType } from 'type-graphql';
 
-@Entity({name: 'chapters'})
+@Entity({ name: 'chapters' })
 @ObjectType()
 export class Chapter {
   @PrimaryGeneratedColumn()
@@ -18,19 +25,19 @@ export class Chapter {
   @Field()
   slug: string;
 
-  @Column({type: 'boolean'})
+  @Column({ type: 'boolean' })
   @Field()
   visible: boolean;
 
-  @Column({type: 'smallint'})
+  @Column({ type: 'smallint' })
   @Field()
   order: number;
 
-  @CreateDateColumn({type: 'datetime'})
+  @CreateDateColumn({ type: 'datetime' })
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({type: 'datetime'})
+  @UpdateDateColumn({ type: 'datetime' })
   @Field()
   updatedAt: Date;
 
