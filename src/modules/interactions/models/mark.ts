@@ -18,16 +18,16 @@ import {Vote} from './vote';
 @ObjectType()
 export class Mark {
   @PrimaryGeneratedColumn({ type: 'bigint' })
-  @Field(type => ID)
+  @Field(() => ID)
   id: number;
 
   @Column()
   @Field()
   status: string;
 
-  @ManyToOne(type => User, user => user.marks)
+  @ManyToOne(() => User, user => user.marks)
   @JoinColumn({name: 'user_id'})
-  @Field(type => User)
+  @Field(() => User)
   user: User;
 
   @CreateDateColumn({name: 'created_at', type: 'datetime'})

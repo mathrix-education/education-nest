@@ -16,7 +16,7 @@ import {Comment} from './comment';
 @ObjectType()
 export class Vote {
   @PrimaryGeneratedColumn({ type: 'bigint' })
-  @Field(type => ID)
+  @Field(() => ID)
   id: number;
 
   @Column({ type: 'tinyint' })
@@ -31,13 +31,13 @@ export class Vote {
   @Field()
   updatedAt: Date;
 
-  @ManyToOne(type => User, user => user.votes)
+  @ManyToOne(() => User, user => user.votes)
   @JoinColumn({name: 'user_id'})
-  @Field(type => User)
+  @Field(() => User)
   user: User;
 
-  @ManyToOne(type => Comment, comment => comment.votes)
+  @ManyToOne(() => Comment, comment => comment.votes)
   @JoinColumn({name: 'comment_id'})
-  @Field(type => Comment)
+  @Field(() => Comment)
   comment: Comment;
 }

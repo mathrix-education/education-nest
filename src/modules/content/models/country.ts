@@ -14,7 +14,7 @@ import { Field, ID, ObjectType } from 'type-graphql';
 @ObjectType()
 export class Country {
   @PrimaryGeneratedColumn()
-  @Field(type => ID)
+  @Field(() => ID)
   id: bigint;
 
   @Column()
@@ -45,6 +45,6 @@ export class Country {
   updatedAt: Date;
 
   @OneToMany(() => Grade, grade => grade.country)
-  @Field(type => Grade)
+  @Field(() => Grade)
   grades: Grade[];
 }

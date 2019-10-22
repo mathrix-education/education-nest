@@ -26,7 +26,7 @@ export enum ModuleType {
 @ObjectType()
 export class Module {
   @PrimaryGeneratedColumn({ type: 'bigint' })
-  @Field(type => ID)
+  @Field(() => ID)
   id: bigint;
 
   @Column({
@@ -37,31 +37,31 @@ export class Module {
   type: ModuleType;
 
   @Column({ type: 'json' })
-  @Field(type => GraphQLJSONObject)
+  @Field(() => GraphQLJSONObject)
   content: object;
 
   @Column({ type: 'json' })
-  @Field(type => GraphQLJSONObject)
+  @Field(() => GraphQLJSONObject)
   questions: string[] | string[][];
 
   @Column({ type: 'json' })
-  @Field(type => GraphQLJSONObject)
+  @Field(() => GraphQLJSONObject)
   choices: string[];
 
   @Column({ type: 'json' })
-  @Field(type => GraphQLJSONObject)
+  @Field(() => GraphQLJSONObject)
   solutions: Array<Array<string | number>>;
 
   @Column({ type: 'json' })
-  @Field(type => GraphQLJSONObject)
+  @Field(() => GraphQLJSONObject)
   corrections: string[][];
 
   @Column({ type: 'json', nullable: true })
-  @Field(type => GraphQLJSONObject)
+  @Field(() => GraphQLJSONObject)
   options: object;
 
   @Column({ type: 'boolean' })
-  @Field(type => GraphQLJSONObject)
+  @Field(() => GraphQLJSONObject)
   visible: boolean;
 
   @Column({name: 'seo_index'})
@@ -101,19 +101,19 @@ export class Module {
   @Field(() => Activity)
   activity: Activity;
 
-  @OneToMany(type => Comment, comment => comment.module)
-  @Field(type => [Comment])
+  @OneToMany(() => Comment, comment => comment.module)
+  @Field(() => [Comment])
   comments: Comment[];
 
-  @OneToMany(type => Post, post => post.module)
-  @Field(type => [Post])
+  @OneToMany(() => Post, post => post.module)
+  @Field(() => [Post])
   posts: Post[];
 
-  @OneToMany(type => Product, product => product.module)
-  @Field(type => [Product])
+  @OneToMany(() => Product, product => product.module)
+  @Field(() => [Product])
   products: Product[];
 
-  @OneToMany(type => Report, report => report.module)
-  @Field(type => [Report])
+  @OneToMany(() => Report, report => report.module)
+  @Field(() => [Report])
   reports: Report[];
 }

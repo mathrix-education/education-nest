@@ -7,7 +7,7 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import {Field, ID, ObjectType} from 'type-graphql';
+import { Authorized, Field, ID, ObjectType } from 'type-graphql';
 import {Purchase} from '../../payments/models/purchases';
 import {Comment} from '../../interactions/models/comment';
 import {Mark} from '../../interactions/models/mark';

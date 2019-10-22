@@ -16,7 +16,7 @@ import {Notion} from "./notion";
 @ObjectType()
 export class Chapter {
   @PrimaryGeneratedColumn()
-  @Field(type => ID)
+  @Field(() => ID)
   id: bigint;
 
   @Column()
@@ -45,12 +45,12 @@ export class Chapter {
 
   @ManyToOne(() => Grade, grade => grade.chapters)
   @JoinColumn({name: 'grade_id'})
-  @Field(type => Grade)
+  @Field(() => Grade)
   grade: Grade;
 
   @ManyToOne(() => Discipline, discipline => discipline.chapters)
   @JoinColumn({name: 'discipline_id'})
-  @Field(type => Discipline)
+  @Field(() => Discipline)
   discipline: Discipline;
 
   @OneToMany(() => Notion, notion => notion.chapter)

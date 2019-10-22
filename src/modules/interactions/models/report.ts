@@ -16,7 +16,7 @@ import {Vote} from './vote';
 @ObjectType()
 export class Report {
   @PrimaryGeneratedColumn({ type: 'bigint' })
-  @Field(type => ID)
+  @Field(() => ID)
   id: number;
 
   @Column({ type: 'text' })
@@ -35,9 +35,9 @@ export class Report {
   @Field()
   status: string;
 
-  @ManyToOne(type => Module, module => module.reports)
+  @ManyToOne(() => Module, module => module.reports)
   @JoinColumn({name: 'module_id'})
-  @Field(type => Module)
+  @Field(() => Module)
   module: Module;
 
   @CreateDateColumn({name: 'created_at', type: 'datetime'})

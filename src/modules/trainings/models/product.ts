@@ -18,7 +18,7 @@ import {ProductProduct} from "./product_product";
 @ObjectType()
 export class Product {
   @PrimaryGeneratedColumn({ type: 'bigint' })
-  @Field(type => ID)
+  @Field(() => ID)
   id: number;
 
   @Column()
@@ -57,21 +57,21 @@ export class Product {
   @Field()
   order: number;
 
-  @ManyToOne(type => Module, module => module.products)
+  @ManyToOne(() => Module, module => module.products)
   @JoinColumn({name: 'module_id'})
-  @Field(type => Module)
+  @Field(() => Module)
   module: Module;
 
-  @OneToMany(type => ProductProduct, productproduct => productproduct.parent)
-  @Field(type => [ProductProduct])
+  @OneToMany(() => ProductProduct, productproduct => productproduct.parent)
+  @Field(() => [ProductProduct])
   parents: ProductProduct[];
 
-  @OneToMany(type => ProductProduct, productproduct => productproduct.child)
-  @Field(type => [ProductProduct])
+  @OneToMany(() => ProductProduct, productproduct => productproduct.child)
+  @Field(() => [ProductProduct])
   children: ProductProduct[];
 
-  @OneToMany(type => Purchase, purchase => purchase.product)
-  @Field(type => [Purchase])
+  @OneToMany(() => Purchase, purchase => purchase.product)
+  @Field(() => [Purchase])
   purchases: Purchase[];
 
   @CreateDateColumn({ type: 'datetime' })

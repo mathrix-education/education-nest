@@ -19,34 +19,34 @@ import {Vote} from './vote';
 @ObjectType()
 export class Comment {
   @PrimaryGeneratedColumn({ type: 'bigint' })
-  @Field(type => ID)
+  @Field(() => ID)
   id: number;
 
   @Column({ type: 'text' })
   @Field()
   content: string;
 
-  @ManyToOne(type => Comment, product => product.children)
+  @ManyToOne(() => Comment, product => product.children)
   @JoinColumn({name: 'parent_id'})
   @Field()
   parent: Comment;
 
-  @OneToMany(type => Comment, product => product.parent)
-  @Field(type => [Comment])
+  @OneToMany(() => Comment, product => product.parent)
+  @Field(() => [Comment])
   children: Comment[];
 
-  @ManyToOne(type => Module, module => module.comments)
+  @ManyToOne(() => Module, module => module.comments)
   @JoinColumn({name: 'module_id'})
-  @Field(type => Module)
+  @Field(() => Module)
   module: Module;
 
-  @ManyToOne(type => User, user => user.comments)
+  @ManyToOne(() => User, user => user.comments)
   @JoinColumn({name: 'user_id'})
-  @Field(type => User)
+  @Field(() => User)
   user: User;
 
-  @OneToMany(type => Vote, vote => vote.comment)
-  @Field(type => Vote)
+  @OneToMany(() => Vote, vote => vote.comment)
+  @Field(() => Vote)
   votes: Vote[];
 
   @CreateDateColumn({name: 'created_at', type: 'datetime'})

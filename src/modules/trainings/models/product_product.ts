@@ -6,17 +6,17 @@ import {Product} from './product';
 @ObjectType()
 export class ProductProduct {
   @PrimaryGeneratedColumn({type: 'bigint'})
-  @Field(type => ID)
+  @Field(() => ID)
   id: number;
 
   @ManyToOne(() => Product, product => product.parents)
   @JoinColumn({name: 'parent_id'})
-  @Field(type => Product)
+  @Field(() => Product)
   parent: Product;
 
-  @ManyToOne(type => Product, product => product.children)
+  @ManyToOne(() => Product, product => product.children)
   @JoinColumn({name: 'child_id'})
-  @Field(type => Product)
+  @Field(() => Product)
   child: Product;
 
   @Column({type: 'smallint'})

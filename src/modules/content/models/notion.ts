@@ -22,7 +22,7 @@ export enum NotionType {
 @ObjectType()
 export class Notion {
   @PrimaryGeneratedColumn({ type: 'bigint' })
-  @Field(type => ID)
+  @Field(() => ID)
   id: bigint;
 
   @Column()

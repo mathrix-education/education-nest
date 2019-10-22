@@ -18,21 +18,21 @@ import {Vote} from '../../interactions/models/vote';
 @ObjectType()
 export class Purchase {
   @PrimaryGeneratedColumn({ type: 'bigint' })
-  @Field(type => ID)
+  @Field(() => ID)
   id: number;
 
   @Column({name: 'transaction_id'})
   @Field()
   transactionId: string;
 
-  @ManyToOne(type => User, user => user.purchases)
+  @ManyToOne(() => User, user => user.purchases)
   @JoinColumn({name: 'user_id'})
-  @Field(type => User)
+  @Field(() => User)
   user: User;
 
-  @ManyToOne(type => Product, product => product.purchases)
+  @ManyToOne(() => Product, product => product.purchases)
   @JoinColumn({name: 'product_id'})
-  @Field(type => Product)
+  @Field(() => Product)
   product: Product;
 
   @CreateDateColumn({name: 'created_at', type: 'datetime'})

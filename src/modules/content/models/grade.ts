@@ -17,7 +17,7 @@ import {User} from '../../users/models/user';
 @ObjectType()
 export class Grade {
   @PrimaryGeneratedColumn()
-  @Field(type => ID)
+  @Field(() => ID)
   id: bigint;
 
   @Column()
@@ -44,18 +44,18 @@ export class Grade {
   @Field()
   updatedAt: Date;
 
-  @ManyToOne(type => Grade, grade => grade.children)
+  @ManyToOne(() => Grade, grade => grade.children)
   @JoinColumn({name: 'parent_id'})
-  @Field(type => Grade)
+  @Field(() => Grade)
   parent: Grade;
 
-  @OneToMany(type => Grade, grade => grade.parent)
-  @Field(type => [Grade])
+  @OneToMany(() => Grade, grade => grade.parent)
+  @Field(() => [Grade])
   children: Grade[];
 
   @ManyToOne(() => Country, country => country.grades)
   @JoinColumn({name: 'country_id'})
-  @Field(type => Country)
+  @Field(() => Country)
   country: Country;
 
   @OneToMany(() => Chapter, chapter => chapter.grade)

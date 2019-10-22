@@ -13,7 +13,7 @@ import { Field, ID, ObjectType } from 'type-graphql';
 @ObjectType()
 export class Category {
   @PrimaryGeneratedColumn({ type: 'bigint' })
-  @Field(type => ID)
+  @Field(() => ID)
   id: number;
 
   @Column()
@@ -32,7 +32,7 @@ export class Category {
   @Field()
   updatedAt: Date;
 
-  @OneToMany(type => Post, post => post.category, {})
-  @Field(type => [Post])
+  @OneToMany(() => Post, post => post.category, {})
+  @Field(() => [Post])
   posts: Post[];
 }

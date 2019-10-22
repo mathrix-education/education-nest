@@ -16,7 +16,7 @@ import {User} from '../../users/models/user';
 @ObjectType()
 export class Post {
   @PrimaryGeneratedColumn({ type: 'bigint' })
-  @Field(type => ID)
+  @Field(() => ID)
   id: number;
 
   @Column()

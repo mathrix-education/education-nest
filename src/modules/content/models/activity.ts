@@ -23,7 +23,7 @@ export enum ActivityType {
 @ObjectType()
 export class Activity {
   @PrimaryGeneratedColumn()
-  @Field(type => ID)
+  @Field(() => ID)
   id: bigint;
 
   @Column()
