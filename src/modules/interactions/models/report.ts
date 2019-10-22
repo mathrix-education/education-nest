@@ -2,14 +2,15 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
+  UpdateDateColumn
 } from 'typeorm';
-import { Field, ID, ObjectType } from 'type-graphql';
-import { Module } from '../../content/models/module';
-import { Vote } from './vote';
+import {Field, ID, ObjectType} from 'type-graphql';
+import {Module} from '../../content/models/module';
+import {Vote} from './vote';
 
 @Entity({ name: 'reports' })
 @ObjectType()
@@ -35,14 +36,15 @@ export class Report {
   status: string;
 
   @ManyToOne(type => Module, module => module.reports)
+  @JoinColumn({name: 'module_id'})
   @Field(type => Module)
   module: Module;
 
-  @CreateDateColumn({ type: 'datetime' })
+  @CreateDateColumn({name: 'created_at', type: 'datetime'})
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'datetime' })
+  @UpdateDateColumn({name: 'updated_at', type: 'datetime'})
   @Field()
   updatedAt: Date;
 }

@@ -2,15 +2,17 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
+  UpdateDateColumn
 } from 'typeorm';
-import { Field, ID, ObjectType } from 'type-graphql';
-import { Module } from '../../content/models/module';
-import { Purchase } from '../../payments/models/purchases';
-import { Vote } from '../../interactions/models/vote';
+import {Field, ID, ObjectType} from 'type-graphql';
+import {Module} from '../../content/models/module';
+import {Purchase} from '../../payments/models/purchases';
+import {Vote} from '../../interactions/models/vote';
+import {ProductProduct} from "./product_product";
 
 @Entity({ name: 'products' })
 @ObjectType()
@@ -55,17 +57,18 @@ export class Product {
   @Field()
   order: number;
 
-  @ManyToOne(type => Product, product => product.children)
-  @Field(type => Product)
-  parent: Product;
-
-  @OneToMany(type => Product, product => product.parent)
-  @Field(type => [Product])
-  children: Product[];
-
   @ManyToOne(type => Module, module => module.products)
+  @JoinColumn({name: 'module_id'})
   @Field(type => Module)
   module: Module;
+
+  @OneToMany(type => ProductProduct, productproduct => productproduct.parent)
+  @Field(type => [ProductProduct])
+  parents: ProductProduct[];
+
+  @OneToMany(type => ProductProduct, productproduct => productproduct.child)
+  @Field(type => [ProductProduct])
+  children: ProductProduct[];
 
   @OneToMany(type => Purchase, purchase => purchase.product)
   @Field(type => [Purchase])

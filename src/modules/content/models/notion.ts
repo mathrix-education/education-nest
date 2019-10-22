@@ -1,11 +1,16 @@
 import {
   Column,
   CreateDateColumn,
-  Entity,
+  Entity, JoinColumn,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
+  UpdateDateColumn
 } from 'typeorm';
-import { Field, ID, ObjectType } from 'type-graphql';
+import {Field, ID, ObjectType} from 'type-graphql';
+import {Module} from "./module";
+import {Chapter} from "./chapter";
+import {Activity} from "./activity";
 
 export enum NotionType {
   FURTHER = 'further',
@@ -36,11 +41,20 @@ export class Notion {
   @Field()
   order: number;
 
-  @CreateDateColumn({ type: 'datetime' })
+  @CreateDateColumn({name: 'created_at', type: 'datetime'})
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'datetime' })
+  @UpdateDateColumn({name: 'updated_at', type: 'datetime'})
   @Field()
   updatedAt: Date;
+
+  @ManyToOne(() => Chapter, chapter => chapter.notions)
+  @JoinColumn({name: 'chapter_id'})
+  @Field(() => Chapter)
+  chapter: Chapter;
+
+  @OneToMany(() => Activity, activity => activity.notion)
+  @Field(() => [Activity])
+  activities: Activity[];
 }

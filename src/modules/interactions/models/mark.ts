@@ -2,14 +2,15 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
+  UpdateDateColumn
 } from 'typeorm';
-import { Field, ID, ObjectType } from 'type-graphql';
-import { User } from '../../users/models/user';
-import { Vote } from './vote';
+import {Field, ID, ObjectType} from 'type-graphql';
+import {User} from '../../users/models/user';
+import {Vote} from './vote';
 
 // tslint:disable:variable-name
 
@@ -25,14 +26,15 @@ export class Mark {
   status: string;
 
   @ManyToOne(type => User, user => user.marks)
+  @JoinColumn({name: 'user_id'})
   @Field(type => User)
   user: User;
 
-  @CreateDateColumn({ type: 'datetime' })
+  @CreateDateColumn({name: 'created_at', type: 'datetime'})
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'datetime' })
+  @UpdateDateColumn({name: 'updated_at', type: 'datetime'})
   @Field()
   updatedAt: Date;
 }

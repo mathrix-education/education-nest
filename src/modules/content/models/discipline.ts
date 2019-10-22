@@ -30,17 +30,13 @@ export class Discipline {
   @Field()
   visible: boolean;
 
-  @CreateDateColumn({ type: 'datetime' })
+  @CreateDateColumn({name: 'created_at', type: 'datetime'})
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'datetime' })
+  @UpdateDateColumn({name: 'updated_at', type: 'datetime'})
   @Field()
   updatedAt: Date;
-
-  @ManyToMany(() => Grade, grade => grade.disciplines)
-  @Field(type => [Grade])
-  grades: Grade[];
 
   @OneToMany(() => Chapter, chapter => chapter.discipline)
   @Field(type => [Chapter])

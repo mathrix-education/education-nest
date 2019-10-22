@@ -1,11 +1,15 @@
 import {
   Column,
   CreateDateColumn,
-  Entity,
+  Entity, JoinColumn,
+  ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { Field, ID, ObjectType } from 'type-graphql';
+import {Field, ID, ObjectType} from 'type-graphql';
+import {Notion} from './notion';
+import {Module} from './module';
 
 export enum ActivityType {
   COURSE = 'course',
@@ -25,10 +29,6 @@ export class Activity {
   @Column()
   @Field()
   name: string;
-
-  @Column()
-  @Field()
-  slug: string;
 
   @Column({
     type: 'enum',
@@ -53,11 +53,20 @@ export class Activity {
   @Field()
   reviewed: boolean;
 
-  @CreateDateColumn({ type: 'datetime' })
+  @CreateDateColumn({name: 'created_at', type: 'datetime'})
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'datetime' })
+  @UpdateDateColumn({name: 'updated_at', type: 'datetime'})
   @Field()
   updatedAt: Date;
+
+  @ManyToOne(() => Notion, notion => notion.activities)
+  @JoinColumn({name: 'notion_id'} )
+  @Field(() => Notion)
+  notion: Notion;
+
+  @OneToMany(() => Module, module => module.activity)
+  @Field(() => [Module])
+  modules: Module[];
 }

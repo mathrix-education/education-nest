@@ -1,16 +1,19 @@
 import {
   Column,
   CreateDateColumn,
-  Entity,
+  Entity, JoinColumn,
+  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
+  UpdateDateColumn
 } from 'typeorm';
-import { Field, ID, ObjectType } from 'type-graphql';
-import { Comment } from '../../interactions/models/comment';
-import { Report } from '../../interactions/models/report';
-import { Product } from '../../trainings/models/product';
-import { GraphQLJSONObject } from 'graphql-type-json';
+import {Field, ID, ObjectType} from 'type-graphql';
+import {Comment} from '../../interactions/models/comment';
+import {Report} from '../../interactions/models/report';
+import {Product} from '../../trainings/models/product';
+import {GraphQLJSONObject} from 'graphql-type-json';
+import {Post} from "../../blog/models/post";
+import {Activity} from "./activity";
 
 export enum ModuleType {
   COURSE = 'course',
@@ -35,11 +38,11 @@ export class Module {
 
   @Column({ type: 'json' })
   @Field(type => GraphQLJSONObject)
-  questions: string[] | string[][];
+  content: object;
 
   @Column({ type: 'json' })
   @Field(type => GraphQLJSONObject)
-  content: object;
+  questions: string[] | string[][];
 
   @Column({ type: 'json' })
   @Field(type => GraphQLJSONObject)
@@ -61,47 +64,56 @@ export class Module {
   @Field(type => GraphQLJSONObject)
   visible: boolean;
 
-  @Column({ type: 'smallint' })
-  @Field()
-  order: number;
-
-  @Column()
+  @Column({name: 'seo_index'})
   @Field()
   seoIndex: boolean;
 
-  @Column()
+  @Column({name: 'seo_title'})
   @Field()
   seoTitle: string;
 
-  @Column()
+  @Column({name: 'seo_slug'})
   @Field()
   seoSlug: string;
 
-  @Column({ type: 'simple-array' })
+  @Column({name: 'seo_keywords', type: 'simple-array'})
   @Field()
   seoKeywords: string;
 
-  @Column()
+  @Column({name: 'seo_description'})
   @Field()
   seoDescription: string;
 
-  @CreateDateColumn({ type: 'datetime' })
+  @Column({type: 'smallint'})
+  @Field()
+  order: number;
+
+  @CreateDateColumn({name: 'created_at', type: 'datetime'})
   @Field()
   createdAt: Date;
 
-  @UpdateDateColumn({ type: 'datetime' })
+  @UpdateDateColumn({name: 'updated_at', type: 'datetime'})
   @Field()
   updatedAt: Date;
+
+  @ManyToOne(() => Activity, activity => activity.modules)
+  @JoinColumn({name: 'activity_id'})
+  @Field(() => Activity)
+  activity: Activity;
 
   @OneToMany(type => Comment, comment => comment.module)
   @Field(type => [Comment])
   comments: Comment[];
 
-  @OneToMany(type => Report, report => report.module)
-  @Field(type => [Report])
-  reports: Report[];
+  @OneToMany(type => Post, post => post.module)
+  @Field(type => [Post])
+  posts: Post[];
 
   @OneToMany(type => Product, product => product.module)
   @Field(type => [Product])
   products: Product[];
+
+  @OneToMany(type => Report, report => report.module)
+  @Field(type => [Report])
+  reports: Report[];
 }
