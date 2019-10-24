@@ -28,9 +28,12 @@ export class AuthService {
     } else {
 
       return {
-        accessToken: this.jwtService.sign({
-          sub: user.id,
-        }),
+        accessToken: this.jwtService.sign(
+          {
+            sub: user.id,
+          },
+          { algorithm: 'ES512' },
+        ),
       };
     }
   }
