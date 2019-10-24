@@ -11,5 +11,9 @@
     "baseUrl": "./",
     "incremental": true
   },
-  "exclude": ["node_modules", "dist", "src/migrations"]
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/database/migrations"
+  ]
 }
