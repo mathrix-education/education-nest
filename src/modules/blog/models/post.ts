@@ -4,8 +4,8 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  PrimaryGeneratedColumn, RelationId,
-  UpdateDateColumn
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import {Category} from './category';
 import {Field, ID, ObjectType} from 'type-graphql';

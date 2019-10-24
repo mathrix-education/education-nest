@@ -6,7 +6,6 @@
 type Activity {
   id: ID!
   name: String!
-  slug: String!
   type: String!
   visible: Boolean!
   order: Float!
@@ -14,6 +13,8 @@ type Activity {
   reviewed: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
+  notion: Notion!
+  modules: [Module!]!
 }
 
 type Category {
@@ -29,12 +30,13 @@ type Chapter {
   id: ID!
   name: String!
   slug: String!
-  visible: Boolean!
   order: Float!
+  visible: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
   grade: Grade!
   discipline: Discipline!
+  notions: [Notion!]!
 }
 
 type Comment {
@@ -72,7 +74,6 @@ type Discipline {
   visible: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
-  grades: [Grade!]!
   chapters: [Chapter!]!
 }
 
@@ -80,13 +81,15 @@ type Grade {
   id: ID!
   name: String!
   slug: String!
-  visible: Boolean!
   order: Float!
+  visible: Boolean!
   createdAt: DateTime!
   updatedAt: DateTime!
+  parent: Grade!
+  children: [Grade!]!
   country: Country!
-  disciplines: [Discipline!]!
   chapters: [Chapter!]!
+  users: [User!]!
 }
 
 """
@@ -109,24 +112,26 @@ type Mark {
 type Module {
   id: ID!
   type: String!
-  questions: [JSONObject!]!
   content: JSONObject!
+  questions: [JSONObject!]!
   choices: [JSONObject!]!
   solutions: [JSONObject!]!
   corrections: [JSONObject!]!
   options: JSONObject!
   visible: JSONObject!
-  order: Float!
   seoIndex: Boolean!
   seoTitle: String!
   seoSlug: String!
   seoKeywords: String!
   seoDescription: String!
+  order: Float!
   createdAt: DateTime!
   updatedAt: DateTime!
+  activity: Activity!
   comments: [Comment!]!
-  reports: [Report!]!
+  posts: [Post!]!
   products: [Product!]!
+  reports: [Report!]!
 }
 
 type Mutation {
@@ -142,6 +147,8 @@ type Notion {
   order: Float!
   createdAt: DateTime!
   updatedAt: DateTime!
+  chapter: Chapter!
+  activities: [Activity!]!
 }
 
 type Post {
@@ -151,6 +158,8 @@ type Post {
   createAt: DateTime!
   updatedAt: DateTime!
   category: Category!
+  module: Module!
+  user: User!
 }
 
 type Product {
@@ -164,12 +173,19 @@ type Product {
   visible: Boolean!
   buyable: Boolean!
   order: Float!
-  parent: Product!
-  children: [Product!]!
   module: Module!
+  parents: [ProductProduct!]!
+  children: [ProductProduct!]!
   purchases: [Purchase!]!
   createdAt: DateTime!
   updateAt: DateTime!
+}
+
+type ProductProduct {
+  id: ID!
+  parent: Product!
+  child: Product!
+  order: Float!
 }
 
 type Purchase {
@@ -230,10 +246,12 @@ type User {
   metadata: JSONObject!
   createdAt: DateTime!
   updatedAt: DateTime!
-  purchases: [Purchase!]!
+  grade: Grade!
   comments: [Comment!]!
-  votes: [Vote!]!
   marks: [Mark!]!
+  posts: [Post!]!
+  purchases: [Purchase!]!
+  votes: [Vote!]!
 }
 
 type Vote {
