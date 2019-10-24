@@ -1,23 +1,14 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { CommonColumns } from '../migration.common';
 
 export class CreateGradesTable1571878385495 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<any> {
     await queryRunner.createTable(new Table({
       name: 'grades',
       columns: [
-        {
-          name: 'id',
-          type: 'bigint',
-          isPrimary: true,
-        },
-        {
-          name: 'name',
-          type: 'varchar',
-        },
-        {
-          name: 'slug',
-          type: 'varchar',
-        },
+        CommonColumns.id,
+        CommonColumns.name,
+        CommonColumns.slug,
         {
           name: 'order',
           type: 'smallint',
@@ -31,17 +22,8 @@ export class CreateGradesTable1571878385495 implements MigrationInterface {
           name: 'country_id',
           type: 'bigint',
         },
-        {
-          name: 'created_at',
-          type: 'datetime',
-          default: 'CURRENT_TIMESTAMP',
-        },
-        {
-          name: 'updated_at',
-          type: 'datetime',
-          default: 'CURRENT_TIMESTAMP',
-          onUpdate: 'CURRENT_TIMESTAMP',
-        },
+        CommonColumns.created_at,
+        CommonColumns.updated_at,
       ],
       foreignKeys: [
         {

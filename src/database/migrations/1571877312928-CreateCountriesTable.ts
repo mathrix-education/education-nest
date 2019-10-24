@@ -1,39 +1,21 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
+import { CommonColumns } from '../migration.common';
 
 export class CreateCountriesTable1571877312928 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(new Table({
       name: 'countries',
       columns: [
-        {
-          name: 'id',
-          type: 'bigint',
-          isPrimary: true,
-        },
-        {
-          name: 'name',
-          type: 'varchar',
-        },
-        {
-          name: 'slug',
-          type: 'varchar',
-        },
+        CommonColumns.id,
+        CommonColumns.name,
+        CommonColumns.slug,
         {
           name: 'visible',
           type: 'boolean',
           default: 1,
         },
-        {
-          name: 'created_at',
-          type: 'datetime',
-          default: 'CURRENT_TIMESTAMP',
-        },
-        {
-          name: 'updated_at',
-          type: 'datetime',
-          default: 'CURRENT_TIMESTAMP',
-          onUpdate: 'CURRENT_TIMESTAMP',
-        },
+        CommonColumns.created_at,
+        CommonColumns.updated_at,
       ],
     }));
   }
