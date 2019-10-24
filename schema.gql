@@ -214,18 +214,6 @@ type Report {
   updatedAt: DateTime!
 }
 
-type Transaction {
-  id: ID!
-  type: String!
-  planId: String!
-  amount: Float!
-  refundedAmount: Float!
-  refundedTransactionId: String!
-  customerId: String!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-}
-
 type User {
   id: ID!
   username: String
@@ -241,9 +229,9 @@ type User {
   premiumBypass: Boolean!
   premiumBypassExpiresAt: DateTime!
   gradeId: Float!
-  stripeId: String
-  braintreeId: String
-  metadata: JSONObject!
+  stripeId: String!
+  braintreeId: String!
+  metadata: String!
   createdAt: DateTime!
   updatedAt: DateTime!
   grade: Grade!

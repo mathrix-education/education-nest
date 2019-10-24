@@ -6,13 +6,19 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
 } from 'typeorm';
-import {Field, ID, ObjectType} from 'type-graphql';
-import {Module} from '../../content/models/module';
-import {Purchase} from '../../payments/models/purchases';
-import {Vote} from '../../interactions/models/vote';
-import {ProductProduct} from "./product_product";
+import { Field, ID, ObjectType } from 'type-graphql';
+import { Module } from '../../content/models/module';
+import { Purchase } from '../../payments/models/purchases';
+import { ProductProduct } from './product_product';
+
+export enum ProductType {
+  PACK = 'pack',
+  TRAINING = 'training',
+  SECTION = 'section',
+  LESSON = 'lesson',
+}
 
 @Entity({ name: 'products' })
 @ObjectType()
@@ -33,7 +39,7 @@ export class Product {
   @Field()
   image: string;
 
-  @Column()
+  @Column({ type: 'enum', enum: ProductType })
   @Field()
   type: string;
 
@@ -58,7 +64,7 @@ export class Product {
   order: number;
 
   @ManyToOne(() => Module, module => module.products)
-  @JoinColumn({name: 'module_id'})
+  @JoinColumn({ name: 'module_id' })
   @Field(() => Module)
   module: Module;
 
