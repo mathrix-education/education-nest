@@ -7,10 +7,10 @@
   "database": "mathrix_education_nest",
   "migrationsTableName": "migrations",
   "migrations": [
-    "src/database/migrations/*.ts"
+    "database/migrations/*.ts"
   ],
   "cli": {
-    "migrationsDir": "src/database/migrations"
+    "migrationsDir": "database/migrations"
   },
   "synchronize": false
 }

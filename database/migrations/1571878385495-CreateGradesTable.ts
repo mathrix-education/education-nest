@@ -16,11 +16,13 @@ export class CreateGradesTable1571878385495 implements MigrationInterface {
         {
           name: 'parent_id',
           type: 'bigint',
+          unsigned: true,
           isNullable: true,
         },
         {
           name: 'country_id',
           type: 'bigint',
+          unsigned: true,
         },
         CommonColumns.created_at,
         CommonColumns.updated_at,

@@ -1,35 +1,39 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 import { CommonColumns } from '../migration.common';
 
-export class CreateChaptersTable1571883753778 implements MigrationInterface {
+export class CreateVotesTable1571891484368 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(new Table({
-      name: 'chapters',
+      name: 'votes',
       columns: [
-        CommonColumns.id,
-        CommonColumns.name,
-        CommonColumns.slug,
-        CommonColumns.order,
         {
-          name: 'discipline_id',
+          name: 'comment_id',
           type: 'bigint',
+          unsigned: true,
+          isPrimary: true,
         },
         {
-          name: 'grade_id',
+          name: 'user_id',
           type: 'bigint',
+          unsigned: true,
+          isPrimary: true,
+        },
+        {
+          name: 'value',
+          type: 'tinyint',
         },
         CommonColumns.created_at,
         CommonColumns.updated_at,
       ],
       foreignKeys: [
         {
-          columnNames: ['discipline_id'],
-          referencedTableName: 'disciplines',
+          columnNames: ['comment_id'],
+          referencedTableName: 'comments',
           referencedColumnNames: ['id'],
         },
         {
-          columnNames: ['grade_id'],
-          referencedTableName: 'grades',
+          columnNames: ['user_id'],
+          referencedTableName: 'users',
           referencedColumnNames: ['id'],
         },
       ],
@@ -37,6 +41,6 @@ export class CreateChaptersTable1571883753778 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('chapters');
+    await queryRunner.dropTable('votes');
   }
 }

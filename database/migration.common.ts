@@ -1,9 +1,8 @@
-import { TableColumnOptions } from 'typeorm/schema-builder/options/TableColumnOptions';
-
-export const CommonColumns: { [key: string]: TableColumnOptions } = {
+export const CommonColumns = {
   id: {
     name: 'id',
     type: 'bigint',
+    unsigned: true,
     isPrimary: true,
   },
   name: {
@@ -18,6 +17,11 @@ export const CommonColumns: { [key: string]: TableColumnOptions } = {
     name: 'order',
     type: 'smallint',
     default: 0, // Highest priority
+  },
+  visible: {
+    name: 'visible',
+    type: 'boolean',
+    default: false,
   },
   created_at: {
     name: 'created_at',
