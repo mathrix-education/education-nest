@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 import { CommonColumns } from '../migration.common';
-import { ActivityType } from '../../src/modules/content/models/activity';
+import { ActivityType } from '../../modules/content/models/activity';
 
 export class CreateActivitiesTable1571885675143 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {

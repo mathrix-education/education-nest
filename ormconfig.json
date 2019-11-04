@@ -5,12 +5,18 @@
   "username": "root",
   "password": "salome3004",
   "database": "mathrix_education_nest",
+  "factories": [
+    "src/database/factories/*.ts"
+  ],
   "migrationsTableName": "migrations",
   "migrations": [
-    "database/migrations/*.ts"
+    "src/database/migrations/*.ts"
   ],
   "cli": {
-    "migrationsDir": "database/migrations"
+    "migrationsDir": "src/database/migrations"
   },
+  "seeds": [
+    "src/database/seeds/*.ts"
+  ],
   "synchronize": false
 }

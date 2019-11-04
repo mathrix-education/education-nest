@@ -1,41 +1,38 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 import { CommonColumns } from '../migration.common';
-import { MarkStatus } from '../../src/modules/interactions/models/mark';
 
-export class CreateMarksTable1571893993044 implements MigrationInterface {
+export class CreateChaptersTable1571883753778 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(new Table({
-      name: 'marks',
+      name: 'chapters',
       columns: [
+        CommonColumns.id,
+        CommonColumns.name,
+        CommonColumns.slug,
+        CommonColumns.order,
+        CommonColumns.visible,
         {
-          name: 'module_id',
+          name: 'discipline_id',
           type: 'bigint',
           unsigned: true,
-          isPrimary: true,
         },
         {
-          name: 'user_id',
+          name: 'grade_id',
           type: 'bigint',
           unsigned: true,
-          isPrimary: true,
-        },
-        {
-          name: 'status',
-          type: 'enum',
-          enum: [MarkStatus.COMPLETED, MarkStatus.TO_REVISE, MarkStatus.VIEW],
         },
         CommonColumns.created_at,
         CommonColumns.updated_at,
       ],
       foreignKeys: [
         {
-          columnNames: ['module_id'],
-          referencedTableName: 'modules',
+          columnNames: ['discipline_id'],
+          referencedTableName: 'disciplines',
           referencedColumnNames: ['id'],
         },
         {
-          columnNames: ['user_id'],
-          referencedTableName: 'users',
+          columnNames: ['grade_id'],
+          referencedTableName: 'grades',
           referencedColumnNames: ['id'],
         },
       ],
@@ -43,6 +40,6 @@ export class CreateMarksTable1571893993044 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('marks');
+    await queryRunner.dropTable('chapters');
   }
 }

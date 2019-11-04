@@ -1,36 +1,46 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 import { CommonColumns } from '../migration.common';
-import { ReportStatus, ReportType } from '../../src/modules/interactions/models/report';
+import { ProductType } from '../../modules/trainings/models/product';
 
-export class CreateReportsTable1571893509413 implements MigrationInterface {
+export class CreateProductsTable1571892454114 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(new Table({
-      name: 'reports',
+      name: 'products',
       columns: [
         CommonColumns.id,
-        {
-          name: 'status',
-          type: 'enum',
-          enum: [ReportStatus.TODO, ReportStatus.DONE],
-        },
+        CommonColumns.name,
+        CommonColumns.slug,
         {
           name: 'type',
           type: 'enum',
           enum: [
-            ReportType.DISPLAY,
-            ReportType.SPELLING,
-            ReportType.WRONG,
-            ReportType.OTHER,
+            ProductType.PACK,
+            ProductType.TRAINING,
+            ProductType.SECTION,
+            ProductType.LESSON,
           ],
         },
         {
-          name: 'content',
+          name: 'description',
           type: 'text',
         },
+        {
+          name: 'price',
+          type: 'smallint',
+          isNullable: true,
+        },
+        {
+          name: 'buyable',
+          type: 'boolean',
+          default: true,
+        },
+        CommonColumns.visible,
+        CommonColumns.order,
         {
           name: 'module_id',
           type: 'bigint',
           unsigned: true,
+          isNullable: true,
         },
         CommonColumns.created_at,
         CommonColumns.updated_at,
@@ -46,6 +56,6 @@ export class CreateReportsTable1571893509413 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('reports');
+    await queryRunner.dropTable('products');
   }
 }

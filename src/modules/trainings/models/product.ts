@@ -86,5 +86,5 @@ export class Product {
 
   @UpdateDateColumn({ type: 'datetime' })
   @Field()
-  updateAt: Date;
+  updatedAt: Date;
 }

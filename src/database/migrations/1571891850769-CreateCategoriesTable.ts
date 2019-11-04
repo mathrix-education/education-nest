@@ -9,6 +9,10 @@ export class CreateCategoriesTable1571891850769 implements MigrationInterface {
         CommonColumns.id,
         CommonColumns.name,
         CommonColumns.slug,
+        {
+          name: 'image',
+          type: 'string',
+        },
         CommonColumns.created_at,
         CommonColumns.updated_at,
       ],

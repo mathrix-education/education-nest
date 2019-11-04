@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 import { CommonColumns } from '../migration.common';
-import { ModuleType } from '../../src/modules/content/models/module';
+import { ModuleType } from '../../modules/content/models/module';
 
 export class CreateModulesTable1571887921373 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {

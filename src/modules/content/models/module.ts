@@ -12,8 +12,8 @@ import {Comment} from '../../interactions/models/comment';
 import {Report} from '../../interactions/models/report';
 import {Product} from '../../trainings/models/product';
 import {GraphQLJSONObject} from 'graphql-type-json';
-import {Post} from "../../blog/models/post";
-import {Activity} from "./activity";
+import {Post} from '../../blog/models/post';
+import {Activity} from './activity';
 
 export enum ModuleType {
   COURSE = 'course',

@@ -24,6 +24,10 @@ export class Category {
   @Field()
   slug: string;
 
+  @Column()
+  @Field()
+  image: string;
+
   @CreateDateColumn({name: 'created_at', type: 'datetime'})
   @Field()
   createdAt: Date;

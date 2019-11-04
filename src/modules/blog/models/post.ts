@@ -29,7 +29,7 @@ export class Post {
 
   @CreateDateColumn({name: 'created_at', type: 'datetime'})
   @Field()
-  createAt: Date;
+  createdAt: Date;
 
   @UpdateDateColumn({name: 'updated_at', type: 'datetime'})
   @Field()

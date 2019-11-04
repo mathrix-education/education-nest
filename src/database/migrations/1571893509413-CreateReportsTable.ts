@@ -1,46 +1,40 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 import { CommonColumns } from '../migration.common';
-import { ProductType } from '../../src/modules/trainings/models/product';
+import { ReportStatus, ReportType } from '../../modules/interactions/models/report';
 
-export class CreateProductsTable1571892454114 implements MigrationInterface {
+export class CreateReportsTable1571893509413 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(new Table({
-      name: 'products',
+      name: 'reports',
       columns: [
         CommonColumns.id,
-        CommonColumns.name,
-        CommonColumns.slug,
+        {
+          name: 'status',
+          type: 'enum',
+          enum: [ReportStatus.TODO, ReportStatus.DONE],
+        },
         {
           name: 'type',
           type: 'enum',
           enum: [
-            ProductType.PACK,
-            ProductType.TRAINING,
-            ProductType.SECTION,
-            ProductType.LESSON,
+            ReportType.DISPLAY,
+            ReportType.SPELLING,
+            ReportType.WRONG,
+            ReportType.OTHER,
           ],
         },
         {
-          name: 'description',
+          name: 'content',
           type: 'text',
         },
         {
-          name: 'price',
-          type: 'smallint',
-          isNullable: true,
+          name: 'context',
+          type: 'text',
         },
-        {
-          name: 'buyable',
-          type: 'boolean',
-          default: true,
-        },
-        CommonColumns.visible,
-        CommonColumns.order,
         {
           name: 'module_id',
           type: 'bigint',
           unsigned: true,
-          isNullable: true,
         },
         CommonColumns.created_at,
         CommonColumns.updated_at,
@@ -56,6 +50,6 @@ export class CreateProductsTable1571892454114 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropTable('products');
+    await queryRunner.dropTable('reports');
   }
 }

@@ -48,6 +48,10 @@ export class User {
   @Field(() => [String])
   scopes: string[];
 
+  @Column({type: 'json'})
+  @Field(() => [String])
+  settings: any;
+
   @Column({ type: 'uuid' })
   @Field()
   token: string;

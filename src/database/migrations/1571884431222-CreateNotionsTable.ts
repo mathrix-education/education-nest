@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 import { CommonColumns } from '../migration.common';
-import { NotionType } from '../../src/modules/content/models/notion';
+import { NotionType } from '../../modules/content/models/notion';
 
 export class CreateNotionsTable1571884431222 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
