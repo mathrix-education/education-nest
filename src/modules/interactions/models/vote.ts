@@ -1,10 +1,10 @@
 import {
   Column,
   CreateDateColumn,
-  Entity,
+  Entity, Index,
   JoinColumn,
   ManyToOne,
-  OneToMany,
+  OneToMany, PrimaryColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn
 } from 'typeorm';
@@ -13,15 +13,12 @@ import {User} from '../../users/models/user';
 import {Comment} from './comment';
 
 @Entity({ name: 'votes' })
+@Index(['user_id', 'comment_id'], {unique: true})
 @ObjectType()
 export class Vote {
-  @PrimaryGeneratedColumn({ type: 'bigint' })
-  @Field(() => ID)
-  id: number;
-
   @Column({ type: 'tinyint' })
   @Field()
-  points: number;
+  value: number;
 
   @CreateDateColumn({name: 'created_at', type: 'datetime'})
   @Field()
@@ -32,11 +29,13 @@ export class Vote {
   updatedAt: Date;
 
   @ManyToOne(() => User, user => user.votes)
+  @PrimaryColumn()
   @JoinColumn({name: 'user_id'})
   @Field(() => User)
   user: User;
 
   @ManyToOne(() => Comment, comment => comment.votes)
+  @PrimaryColumn()
   @JoinColumn({name: 'comment_id'})
   @Field(() => Comment)
   comment: Comment;

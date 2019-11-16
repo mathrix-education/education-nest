@@ -6,6 +6,8 @@ import slugify from 'slugify';
 define(Product, (faker: typeof Faker) => {
   const product = new Product();
   const date = new Date();
+  let range1_50 = [...Array(50).keys()];
+  let k = range1_50.;
   product.name = faker.lorem.sentence(faker.random.number(1, 2));
   product.slug = slugify(product.name);
   product.image = 'img/products/' + faker.random.uuid() + '.jpg';

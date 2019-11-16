@@ -5,7 +5,7 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  UpdateDateColumn
+  UpdateDateColumn,
 } from 'typeorm';
 import {Field, ID, ObjectType} from 'type-graphql';
 import {Comment} from '../../interactions/models/comment';
@@ -14,6 +14,7 @@ import {Product} from '../../trainings/models/product';
 import {GraphQLJSONObject} from 'graphql-type-json';
 import {Post} from '../../blog/models/post';
 import {Activity} from './activity';
+import {Mark} from "../../interactions/models/mark";
 
 export enum ModuleType {
   COURSE = 'course',
@@ -38,15 +39,15 @@ export class Module {
 
   @Column({ type: 'json' })
   @Field(() => GraphQLJSONObject)
-  content: object;
+  content: string;
 
   @Column({ type: 'json' })
   @Field(() => GraphQLJSONObject)
-  questions: string[] | string[][];
+  questions: string[];
 
   @Column({ type: 'json' })
   @Field(() => GraphQLJSONObject)
-  choices: string[];
+  choices: string[][];
 
   @Column({ type: 'json' })
   @Field(() => GraphQLJSONObject)
@@ -104,6 +105,10 @@ export class Module {
   @OneToMany(() => Comment, comment => comment.module)
   @Field(() => [Comment])
   comments: Comment[];
+
+  @OneToMany(() => Mark, mark => mark.module)
+  @Field(() => [Mark])
+  marks: Mark[];
 
   @OneToMany(() => Post, post => post.module)
   @Field(() => [Post])
